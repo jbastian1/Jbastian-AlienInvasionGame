@@ -12,9 +12,11 @@ class Settings:
         self.ship_w = 40                                                        # Ship settings
         self.ship_h = 60                                                        # Ship settings
         self.ship_speed = 5                                                     # Ship settings
+        self.starting_ship_count = 3
 
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'  # Bullet settings
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'        # Bullet settings
+        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'impactSound.mp3' # Bullet settings
         self.bullet_speed = 7                                                   # Bullet settings
         self.bullet_w = 25                                                      # Bullet settings
         self.bullet_h = 80                                                      # Bullet settings
