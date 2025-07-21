@@ -3,28 +3,41 @@ from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from alien_fleet import AlienFleet
 
-class Alien(Sprite):                                               # A class to manage bullets fired from the ship.
-    def __init__(self, game: 'AlienInvasion', x: float, y: float) -> None:              # Create a bullet object at the ship's current position.
+class Alien(Sprite):
+    def __init__(self, fleet: 'AlienFleet', x: float, y: float) -> None:
         super().__init__()
+        self.fleet = fleet
+        self.screen = fleet.game.screen
+        self.bounaries = fleet.game.screen.get_rect()
+        self.settings = fleet.game.settings
 
-        self.screen = game.screen
-        self.bounaries = game.screen.get_rect()
-        self.settings = game.settings
-
-        self.image = pygame.image.load(self.settings.bullet_file)
+        self.image = pygame.image.load(self.settings.alien_file)
         self.image = pygame.transform.scale(self.image,
-            (self.settings.bullet_w, self.settings.bullet_h)
+            (self.settings.alien_w, self.settings.alien_h)
             )
 
-        self.rect = self.image.get_rect()                           # Create a bullet rect and then set correct position.
-        self.rect.midtop = game.ship.rect.midtop    # bug self.'ship'.rect.midtop - textbok "ai_game.ship.rect.mitop" - sets bullet's midtop attribute to match ship's midtop attribute, FIXED self should be game
-        self.y = float(self.rect.y)                                 # Store the bullet's position as a float.
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        
+        self.y = float(self.rect.y)
+        self.x = float(self.rect.x)
 
-    def update(self) -> None:                                       # Move the bullet up the screen.
-        self.y -= self.settings.bullet_speed                        # Update the exact position of the bullet.
-        self.rect.y = self.y                                        # Update the rect position.
+    def update(self) -> bool:
+        temp_speed = self.settings.fleet_speed
 
-    def draw_Alien(self) -> None:                                  # Draw the bullet to the screen.
+        #if self.check_edges():
+        #    # self.settings.fleet_direction += -1
+        #    self.y += self.settings.fleet_drop_speed
+
+        self.x += temp_speed * self.fleet.fleet_direction
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+    def check_edges(self) -> bool:
+        return (self.rect.right >= self.bounaries.right or self.rect.left <= self.bounaries.left)
+
+    def draw_alien(self) -> None:
         self.screen.blit(self.image, self.rect)

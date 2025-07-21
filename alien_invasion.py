@@ -2,6 +2,7 @@
 Program: Alien Invasion!
 Author: Jonathan Bastian
 The program is a spaceship game, 'Alien Invasion', following the video resources on blackboard, as well as parts from the textbook.
+    With edits made according to lab requirements (Labs 11 and 12).
 Date: Sunday, July 20, 2025
 """
 
@@ -10,11 +11,12 @@ import pygame
 from settings import Settings
 from ship import Ship
 from arsenal import Arsenal
+# from alien import Alien
+from alien_fleet import AlienFleet
 
 class AlienInvasion:                                                # Overall class to manage game assets and behavior.
 
     def __init__(self) -> None:                                     # Initialize the game, and create game resources.
-        # from alien_fleet import AlienFleet
         pygame.init()
         self.settings = Settings()
         # self.settings.initialize_dynamic_settings()
@@ -31,26 +33,49 @@ class AlienInvasion:                                                # Overall cl
         self.running = True
         self.clock = pygame.time.Clock()
 
-        # self.game_stats = GameStats(self)
-        # self.HUD = HUD(self)
-        self.ship = Ship(self, Arsenal(self))
-        # self.aliens = AlienFleet(self)
-
-
         pygame.mixer.init()
         self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
         self.laser_sound.set_volume(0.7)
+
+        # self.game_stats = GameStats(self)
+        # self.HUD = HUD(self)
+        self.ship = Ship(self, Arsenal(self))
+        self.alien_fleet = AlienFleet(self)
+        self.alien_fleet.create_fleet()
+        # self.aliens = AlienFleet(self)
 
     def run_game(self) -> None:                                     # Start the main loop for the game. Game loop
         while self.running:
             self._check_events()
             self.ship.update()
+            self.alien_fleet.update_fleet()
+            self._check_collisions()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
+
+    def _check_collisions(self) -> None:
+            # check collisions for ship
+            if self.ship.check_collisions(self.alien_fleet.fleet):
+                self._reset_level()                                 # the alien fleet to reset
+                # the ship to recover
+                # subtract one life if possible
+
+            # check collisions for aliens and bottom of screen
+            collisions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
+            # check collisions of projectiles and aliens
+
+
+
+    def _reset_level(self) -> None:
+        self.ship.arsenal.arsenal.empty()
+        self.alien_fleet.fleet.empty()
+        self.alien_fleet.create_fleet()
+
 
     def _update_screen(self) -> None:                               # Update images on the screen, and flip to the new screen.
             self.screen.blit(self.bg, (0,0))
             self.ship.draw()
+            self.alien_fleet.draw()
             pygame.display.flip()                                   # Make the most recently drawn screen visible.
 
     def _check_events(self) -> None:                                # Respond to keypresses and mouse events.

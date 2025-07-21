@@ -19,11 +19,14 @@ class Ship:                                                                     
             )
         
         self.rect = self.image.get_rect()
-        self.rect.midbottom = self.boundaries.midbottom                         # Start each new ship at the bottom center of the screen.
+        self._center_ship()
         self.moving_right = False                                               # Movement flag; start with a ship that's not moving.
         self.moving_left = False                                                # Movement flag; start with a ship that's not moving.
-        self.x = float(self.rect.x)                                             # Store a float for the ship's exact horizontal position.
         self.arsenal = arsenal
+
+    def _center_ship(self) -> None:
+        self.rect.midbottom = self.boundaries.midbottom                         # Start each new ship at the bottom center of the screen.
+        self.x = float(self.rect.x)                                             # Store a float for the ship's exact horizontal position.
 
     def update(self) -> None:                                                   # Update the ship's position based on the movement flag. updating the position of the ship
         self._update_ship_movement()
@@ -44,3 +47,9 @@ class Ship:                                                                     
 
     def fire(self) -> bool:
         return self.arsenal.fire_bullet()
+
+    def check_collisions(self, other_group):
+        if pygame.sprite.spritecollideany(self, other_group):
+            self._center_ship()
+            return True
+        return False
