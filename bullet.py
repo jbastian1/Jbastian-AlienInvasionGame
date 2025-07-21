@@ -18,7 +18,7 @@ class Bullet(Sprite):                                               # A class to
             )
 
         self.rect = self.image.get_rect()                           # Create a bullet rect and then set correct position.
-        self.rect.midtop = game.ship.rect.midtop    # bug self.'ship'.rect.midtop - textbok "ai_game.ship.rect.mitop" - sets bullet's midtop attribute to match ship's midtop attribute, FIXED self should be game
+        self.rect.midtop = game.ship.rect.midtop
         self.y = float(self.rect.y)                                 # Store the bullet's position as a float.
 
     def update(self) -> None:                                       # Move the bullet up the screen.

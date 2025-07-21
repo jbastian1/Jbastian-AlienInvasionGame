@@ -2,7 +2,7 @@
 Program: Alien Invasion!
 Author: Jonathan Bastian
 The program is a spaceship game, 'Alien Invasion', following the video resources on blackboard, as well as parts from the textbook.
-    With edits made according to lab requirements (Labs 11 and 12).
+    With edits made according to lab requirements (Labs 11 and 12). Lab11_jbastian.py
 Date: Sunday, July 20, 2025
 """
 
