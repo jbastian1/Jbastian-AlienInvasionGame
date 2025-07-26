@@ -55,17 +55,17 @@ class AlienInvasion:
                 self._check_keyup_events(event)
 
     def _check_keyup_events(self, event) -> None:
-        if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = False
-        elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False
+        if event.key == pygame.K_UP:                                                            # K_RIGHT -> K_UP
+            self.ship.moving_up = False                                                         # moving_right -> moving_up
+        elif event.key == pygame.K_DOWN:                                                        # K_LEFT -> K_DOWN
+            self.ship.moving_down = False                                                       # moving_right -> moving_down
 
 
     def _check_keydown_events(self, event) -> None:
-        if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = True
-        elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = True
+        if event.key == pygame.K_UP:                                                            # K_RIGHT -> K_UP
+            self.ship.moving_up = True                                                          # moving_right -> moving_up
+        elif event.key == pygame.K_DOWN:                                                        # K_LEFT -> K_DOWN
+            self.ship.moving_down = True                                                        # moving_left -> moving_down
         elif event.key == pygame.K_SPACE:
             if self.ship.fire():
                 self.laser_sound.play()

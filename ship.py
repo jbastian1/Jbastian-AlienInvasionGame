@@ -22,10 +22,10 @@ class Ship:
             )
 
         self.rect = self.image.get_rect()
-        self.rect.midbottom = self.boundaries.midbottom
-        self.moving_right = False
-        self.moving_left = False
-        self.x = float(self.rect.x)
+        self.rect.midleft = self.boundaries.midleft                                                 # midbottom -> midleft, midbottom -> midleft
+        self.moving_up = False                                                                      # moving_right -> moving_up
+        self.moving_down = False                                                                    # moving_left -> moving_down
+        self.y = float(self.rect.y)                                                                 # x -> y, x -> y
         self.arsenal = arsenal
 
     def update(self) -> None:
@@ -35,12 +35,12 @@ class Ship:
 
     def _update_ship_movement(self) -> None:
         temp_speed = self.settings.ship_speed
-        if self.moving_right and self.rect.right < self.boundaries.right:
-            self.x += temp_speed
-        if self.moving_left and self.rect.left > self.boundaries.left:
-            self.x -= temp_speed
+        if self.moving_up and self.rect.top > self.boundaries.top:                                  # moving_right -> moving_up, right < right -> top > top
+            self.y -= temp_speed                                                                    # x += -> y -=
+        if self.moving_down and self.rect.bottom < self.boundaries.bottom:                          # moving_left -> moving_down, left -> bottom, left -> bottom
+            self.y += temp_speed                                                                    # x -= -> y +=
 
-        self.rect.x = self.x
+        self.rect.y = self.y                                                                        # x -> y, x -> y
 
     def draw(self) -> None:
         self.arsenal.draw()

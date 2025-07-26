@@ -1,6 +1,7 @@
 import pygame
 from bullet import Bullet
 from typing import TYPE_CHECKING
+from settings import Settings                                                                       # added to import screen width
 
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
@@ -17,7 +18,7 @@ class Arsenal:
 
     def _remove_bullets_offscreen(self) -> None:
         for bullet in self.arsenal.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.left >= self.settings.screen_w:                                          # bottom <= 0 -> left >= self.settings.screen_w
                 self.arsenal.remove(bullet)
 
     def draw(self) -> None:

@@ -18,12 +18,12 @@ class Bullet(Sprite):
             )
 
         self.rect = self.image.get_rect()
-        self.rect.midtop = game.ship.rect.midtop
-        self.y = float(self.rect.y)
+        self.rect.midright = game.ship.rect.midright                                                # midtop -> midright
+        self.x = float(self.rect.x)                                                                 # y -> x, y -> x
 
     def update(self) -> None:
-        self.y -= self.settings.bullet_speed
-        self.rect.y = self.y
+        self.x += self.settings.bullet_speed                                                        # y -= -> x +=
+        self.rect.x = self.x                                                                        # y -> x, y -> x
 
     def draw_bullet(self) -> None:
         self.screen.blit(self.image, self.rect)
