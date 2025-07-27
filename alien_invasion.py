@@ -80,7 +80,7 @@ class AlienInvasion:
         else:
             self.game_active = False
 
-
+        print(self.game_stats.ships_left)
 
 
     def _reset_level(self) -> None:
