@@ -12,6 +12,7 @@ class Settings:
         self.ship_w = 60                                                                            # 40 -> 60
         self.ship_h = 40                                                                            # 60 -> 40
         self.ship_speed = 5
+        self.starting_ship_count = 3
 
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'laserBlastside.png'                  # laserBlast -> laserBlastside
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'
