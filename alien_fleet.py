@@ -29,8 +29,8 @@ class AlienFleet:
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset) -> None:
-        for row in range(fleet_h):
-            for col in range(fleet_w):
+        for col in range(fleet_w):                                                                          # row fleet_h -> col fleet_w
+            for row in range(fleet_h):                                                                      # col fleet_w -> row fleet_h
                 current_x = alien_w * col + x_offset
                 current_y = alien_h * row + y_offset
                 if col % 2 == 0 or row % 2 == 0:
@@ -38,27 +38,27 @@ class AlienFleet:
                 self._create_alien(current_x, current_y)
 
     def calculate_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h) -> tuple[int, int]:
-        half_screen = self.settings.screen_h//2
+        half_screen = self.settings.screen_h//2                                                             #
         fleet_horizontal_space = fleet_w * alien_w
         fleet_vertical_space = fleet_h * alien_h
-        x_offset = int((screen_w-fleet_horizontal_space)//2)
-        y_offset = int((half_screen-fleet_vertical_space)//2)
+        x_offset = int((screen_w-fleet_horizontal_space)//2)                                                #
+        y_offset = int((half_screen-fleet_vertical_space)//2)                                               #
         return x_offset,y_offset
 
 
     def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h) -> tuple[int, int]:
-        fleet_w = (screen_w//alien_w)
-        fleet_h = ((screen_h /2)/alien_h)
+        fleet_w = (screen_w//alien_w)                                                                       #
+        fleet_h = ((screen_h /2)/alien_h)                                                                   #
 
         if fleet_w % 2 == 0:
-            fleet_w -= 1
+            fleet_w -= 1                                                                                    #
         else:
-            fleet_w -= 2
+            fleet_w -= 2                                                                                    #
 
         if fleet_h % 2 == 0:
-            fleet_h -= 1
+            fleet_h -= 1                                                                                    #
         else:
-            fleet_h -= 2
+            fleet_h -= 2                                                                                    #
 
 
         return int(fleet_w), int(fleet_h)
@@ -80,7 +80,7 @@ class AlienFleet:
 
     def _drop_alien_fleet(self) -> None:
         for alien in self.fleet:
-            alien.y += self.fleet_drop_speed
+            alien.x -= self.fleet_drop_speed                                                                # y += -> x -=
 
 
     def update_fleet(self) -> None:
@@ -96,10 +96,10 @@ class AlienFleet:
     def check_collisions(self, other_group): # -> Dict[Any, List]:
         return pygame.sprite.groupcollide(self.fleet, other_group, True, True)
 
-    def check_fleet_bottom(self) -> bool:
+    def check_fleet_left(self) -> bool:                                                                     # check_fleet_bottom -> check_fleet_left
         alien: Alien
         for alien in self.fleet:
-            if alien.rect.bottom >= self.settings.screen_h:
+            if alien.rect.left >= self.settings.screen_w:                                                   # bottom >= screen_h -> left >= screen_w
                 return True
         return False
 

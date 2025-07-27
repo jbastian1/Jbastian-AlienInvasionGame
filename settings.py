@@ -22,7 +22,7 @@ class Settings:
         self.bullet_h = 40                                                                          # (80 -> 25)
         self.bullet_amount = 5
 
-        self.alien_file = Path.cwd() / 'Assets' / 'images' / 'enemy_4.png'
+        self.alien_file = Path.cwd() / 'Assets' / 'images' / 'enemy_4_side.png'                     # enemy_4 -> enemy_4_side
         self.alien_w = 40
         self.alien_h = 40
         self.fleet_speed = 2
