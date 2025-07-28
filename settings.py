@@ -8,7 +8,7 @@ class Settings:
         self.FPS = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'Starbasesnowside.png'
         self.difficulty_scale = 1.1
-        self.score_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
+        self.scores_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
 
         self.ship_file = Path.cwd() / 'Assets' / 'images' / 'ship2side(no bg).png'                  # ship2(no bg) -> ship2side(no bg)
         self.ship_w = 60                                                                            # 40 -> 60

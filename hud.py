@@ -61,7 +61,7 @@ class HUD:
         self.level_image = self.font.render(level_str, True,
             self.settings.text_color, None)
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.padding
+        self.level_rect.left = self.padding
         self.level_rect.top = self.level_rect.bottom + self.padding
 
     def _draw_lives(self) -> None:
@@ -75,5 +75,5 @@ class HUD:
         self.screen.blit(self.hi_score_image,self.hi_score_rect)
         self.screen.blit(self.max_score_image,self.max_score_rect)
         self.screen.blit(self.score_image,self.score_rect)
-        self.screen.blit(self.score_image,self.level_rect)
+        self.screen.blit(self.level_image,self.level_rect)
         self._draw_lives()
