@@ -10,7 +10,7 @@ from time import sleep
 from button import Button
 from hud import HUD
 
-class AlienInvasion:            # last two videos unit 13 & short question
+class AlienInvasion:
 
     def __init__(self) -> None:
         pygame.init()
