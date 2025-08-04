@@ -12,6 +12,8 @@ class Arsenal:
         self.settings = game.settings
         self.arsenal = pygame.sprite.Group()
 
+        # self.max_x = game.screen.get_rect().right                                                 alternative way to remove bullets offscreen
+
     def update_arsenal(self) -> None:
         self.arsenal.update()
         self._remove_bullets_offscreen()

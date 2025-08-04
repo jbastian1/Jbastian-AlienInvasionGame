@@ -20,6 +20,7 @@ class Ship:
         self.image = pygame.transform.scale(self.image,
             (self.settings.ship_w, self.settings.ship_h)
             )
+        # self.image = pygame.transform.rotate(self.image, 90)                                      alternative way to rotate the ship
 
         self.rect = self.image.get_rect()
         self._center_ship()
@@ -32,7 +33,7 @@ class Ship:
         self.y = float(self.rect.y)                                                                 # x -> y, x -> y
 
     def update(self) -> None:
-        # updating the position of the ship
+        """ updating the position of the ship """
         self._update_ship_movement()
         self.arsenal.update_arsenal()
 

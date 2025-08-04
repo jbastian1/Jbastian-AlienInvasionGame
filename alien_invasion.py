@@ -48,7 +48,7 @@ class AlienInvasion:
         self.game_active = False
 
     def run_game(self) -> None:
-        # Game loop
+        """ Game loop """
         while self.running:
             self._check_events()
             if self.game_active:
@@ -59,7 +59,7 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _check_collision(self) -> None:
-        # check collisions for ship
+        """ check collisions for ship """
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
             # subtract one life if possible
